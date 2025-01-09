@@ -1,22 +1,24 @@
-import type { Metadata } from "next";
-import localFont from "next/font/local";
-import "./globals.css";
-import { MainLayout } from "@/layouts";
+import localFont from 'next/font/local';
+
+import { MainLayout } from '@/layouts';
+import './globals.css';
+
+import type { Metadata } from 'next';
 
 const geistSans = localFont({
-  src: "./fonts/GeistVF.woff",
-  variable: "--font-geist-sans",
-  weight: "100 900",
+  src: './fonts/GeistVF.woff',
+  variable: '--font-geist-sans',
+  weight: '100 900',
 });
 const geistMono = localFont({
-  src: "./fonts/GeistMonoVF.woff",
-  variable: "--font-geist-mono",
-  weight: "100 900",
+  src: './fonts/GeistMonoVF.woff',
+  variable: '--font-geist-mono',
+  weight: '100 900',
 });
 
 export const metadata: Metadata = {
-  title: "iTunes Search",
-  description: "Searching media in iTunes",
+  title: 'iTunes Search',
+  description: 'Searching media in iTunes',
 };
 
 export default function RootLayout({

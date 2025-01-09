@@ -1,8 +1,8 @@
 'use client'
 
-import { useCallback, useState } from "react";
+import { useCallback, useState } from 'react';
 
-import type { FC, FormEvent } from "react";
+import type { FC, FormEvent } from 'react';
 
 interface SearchFormProps {
   onSearch: (queryStr: string) => void
@@ -27,7 +27,7 @@ export const SearchForm:FC<SearchFormProps> = ({ onSearch }) => {
       />
       <button 
         type="submit"
-        className='w-[200px] p-2 rounded-lg bg-accent text-white flex items-center justify-center shadow-lg hover:shadow-xl'
+        className='sm:w-[200px] w-[100px] p-2 rounded-lg bg-accent text-white flex items-center justify-center shadow-lg hover:shadow-xl'
       >
         Search
       </button>

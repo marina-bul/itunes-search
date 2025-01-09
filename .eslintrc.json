@@ -1,3 +1,25 @@
 {
-  "extends": ["next/core-web-vitals", "next/typescript"]
+  "extends": ["next/core-web-vitals", "next/typescript"],
+  "rules": {
+    "linebreak-style": ["error", "unix"],
+    "quotes": ["error", "single"],
+    "object-curly-spacing": ["error", "always"],
+    "react/jsx-indent": ["error", 2],
+    "react/jsx-indent-props": ["error", 2],
+    "indent": ["error", 2],
+    "import/order": [
+      "error",
+      {
+        "groups": [
+          "builtin",
+          "external",
+          "internal",
+          ["parent", "sibling", "index"],
+          "type"
+        ],
+        "pathGroupsExcludedImportTypes": ["builtin"],
+        "newlines-between": "always"
+      }
+    ]
+  }
 }

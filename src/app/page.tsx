@@ -1,4 +1,4 @@
-import { MediaSearch } from "@/features/MediaSearch/MediaSearch";
+import { MediaSearch } from '@/features/MediaSearch/MediaSearch';
 
 
 export default function Home() {

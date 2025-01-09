@@ -1,14 +1,21 @@
 'use client'
 
-import { useSearch } from "@/shared/hooks/useSearch";
-import { SearchForm } from "@/widgets/SearchForm/SearchForm";
-import { MediaItem } from "./elems/MediaCard/MediaCard";
+import { useSearch } from '@/shared/hooks/useSearch';
+import { SearchForm } from '@/widgets/SearchForm/SearchForm';
 
-import type { IMediaItem } from "@/shared/types/media";
+import { MediaItem } from './elems/MediaCard/MediaCard';
+
+import type { IMediaItem } from '@/shared/types/media';
 
 
 export const MediaSearch = () => {
-  const {data: mediaItems, isLoading, isSuccess, error, handleSearchData} = useSearch<IMediaItem>()
+  const {
+    data: mediaItems, 
+    isLoading, 
+    isSuccess, 
+    error, 
+    handleSearchData
+  } = useSearch<IMediaItem>()
 
   return (
     <>
@@ -20,9 +27,9 @@ export const MediaSearch = () => {
         <ul className="flex justify-around gap-8 flex-wrap list-none">
           { mediaItems.length ? (
             mediaItems.map(item => <MediaItem key={item.id} mediaItem={item} />)
-            ) : (
-              <li>No results for your request. Please, try a new search</li>
-            )
+          ) : (
+            <li>No results for your request. Please, try a new search</li>
+          )
           }
         </ul> 
       )}

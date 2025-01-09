@@ -1,4 +1,4 @@
-import { useCallback, useState } from "react";
+import { useCallback, useState } from 'react';
 
 type SearchError = string | null
 
@@ -24,37 +24,35 @@ export const useSearch = <T>():SearchResult<T> => {
 
     if (!queryString.trim()) {
       setIsLoading(false);
-      setError("Query string is required");
+      setError('Query string is required');
       return;
     }
 
     try {
-        const response = await fetch(`/api/itunes?term=${encodeURIComponent(queryString)}`, {
-            method: 'GET',
-            headers: { 'Content-Type': 'application/json' },
-        });
+      const response = await fetch(`/api/itunes?term=${encodeURIComponent(queryString)}`, {
+        method: 'GET',
+        headers: { 'Content-Type': 'application/json' },
+      });
 
-        const data = await response.json();
+      const data = await response.json();
         
-        if (response.ok) {
-          setData(data.results);
-          setIsSuccess(true)
-        } else {
-          setError('Oops! An error occured. Try to reload page')
-          console.error('Error:', data.error);
-        }
+      if (response.ok) {
+        setData(data.results);
+        setIsSuccess(true)
+      } else {
+        setError('Oops! An error occurred. Try to reload page')
+        console.error('Error:', data.error);
+      }
 
     } catch (error) {
-
-        setError('Oops! An error occured. Try to reload page')
-        console.error('Error making request:', error);
-
+      setError('Oops! An error occurred. Try to reload page')
+      console.error('Error making request:', error);
     } finally {
       setIsLoading(false);
     }
   }, [])
 
-  return {data, error, isLoading, isSuccess, handleSearchData}
+  return { data, error, isLoading, isSuccess, handleSearchData }
 }
 
 
