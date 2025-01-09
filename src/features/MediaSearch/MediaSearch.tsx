@@ -27,7 +27,7 @@ export const MediaSearch = () => {
         
 
         if (response.ok) {
-          setMediaItems(data.result.results);
+          setMediaItems(data.results);
         } else {
           setError('Oops! An error occured. Try to reload page')
           console.error('Error:', data.error);
@@ -46,21 +46,22 @@ export const MediaSearch = () => {
       {loading && <div>Loading...</div>}
       {error && <div>{error}</div>}
       {!loading && mediaItems.length > 0 && (
-        <ul className="flex justify-between gap-8 flex-wrap list-none">
+        <ul className="flex justify-around gap-8 flex-wrap list-none">
           {mediaItems.map(item => (
-            <li key={item.collectionId || item.trackId} className="w-[300px] border border-[#dce4e7] rounded-[10px]">
-              <Link href={item.collectionViewUrl || item.trackViewUrl} target="blank" className="flex gap-4">
-                <Image 
-                  src={item.artworkUrl100} 
-                  alt={item.collectionName || item.trackName} 
-                  width={100} 
-                  height={100} 
-                  style={{ objectFit: "contain" }} 
-                />
-                <div className="w-full p-2">
-                  <p className="mb-4 p-1 text-sm text-right border rounded-[8px] bg-[#fcefe9]">{item.wrapperType}</p>
+            <li key={item.id} className="w-[300px] border border-border rounded-[10px] shadow-lg">
+              <Link href={item.url} target="blank" className="flex gap-4 p-2">
+                <div className="w-[100px] h-[100px] shrink-0 bg-border">
+                  <Image 
+                    src={item.image} 
+                    alt={item.name} 
+                    width={100} 
+                    height={100} 
+                  />
+                </div>
+                <div className="w-full">
+                  <p className="mb-4 p-1 text-sm text-right border rounded-[8px] bg-[#fcefe9]">{item.type}</p>
                   <p className="mb-2 font-medium">{item.artistName}</p>
-                  <p className="mb-4 text-sm">{item.collectionName || item.trackName}</p>
+                  <p className="mb-4 text-sm">{item.name}</p>
                   
                 </div>
               </Link>

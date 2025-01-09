@@ -17,7 +17,7 @@ export async function GET(req: Request) {
 
         if (!response.ok) {
             return NextResponse.json(
-              { error: 'Failed to fetch data from iTunes Search API' },
+              { error: 'Failed to fetch data from iTunes API' },
               { status: response.status }
             );
         }
@@ -26,10 +26,21 @@ export async function GET(req: Request) {
 
         console.log(data);
         
+        // eslint-disable-next-line @typescript-eslint/no-explicit-any
+        const transformedData = data.results.map((mediaItem:any) => {
+            return {
+                id: mediaItem.collectionId || mediaItem.trackId || mediaItem.artistId || 0,
+                name: mediaItem.collectionName || mediaItem.trackName || mediaItem.artistName || '',
+                url: mediaItem.collectionViewUrl || mediaItem.trackViewUrl || mediaItem.artistLinkUrl || '',
+                image: mediaItem.artworkUrl100 || '',
+                artistName: mediaItem.artistName,
+                type: mediaItem.wrapperType
+            }
+        })
 
-        return NextResponse.json({ result: data }, {status: 200});
+        return NextResponse.json({results: transformedData}, {status: 200});
     } catch (error) {
         console.error(error);
-        return NextResponse.json({ error: 'Error generating text' }, {status: 500});
+        return NextResponse.json({ error: 'Failed to fetch data from iTunes API' }, {status: 500});
     }
 }

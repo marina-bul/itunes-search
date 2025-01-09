@@ -9,6 +9,8 @@ export default {
       colors: {
         background: "var(--background)",
         foreground: "var(--foreground)",
+        border: "var(--border)",
+        accent: "var(--accent)"
       },
     },
   },
