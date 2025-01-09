@@ -1,10 +1,12 @@
 
 import { NextResponse } from 'next/server';
 
+import type { IApiMediaItem } from '@/shared/types/media';
+
 
 export async function GET(req: Request) {
     const { searchParams } = new URL(req.url);
-    const term = searchParams.get('term') || '';
+    const term = searchParams.get('term');
     
     if (!term) {
         return NextResponse.json({ error: 'Query string is required' }, {status: 400});
@@ -23,11 +25,8 @@ export async function GET(req: Request) {
         }
 
         const data = await response.json();
-
-        console.log(data);
         
-        // eslint-disable-next-line @typescript-eslint/no-explicit-any
-        const transformedData = data.results.map((mediaItem:any) => {
+        const transformedData = data.results.map((mediaItem:IApiMediaItem) => {
             return {
                 id: mediaItem.collectionId || mediaItem.trackId || mediaItem.artistId || 0,
                 name: mediaItem.collectionName || mediaItem.trackName || mediaItem.artistName || '',
@@ -39,6 +38,7 @@ export async function GET(req: Request) {
         })
 
         return NextResponse.json({results: transformedData}, {status: 200});
+
     } catch (error) {
         console.error(error);
         return NextResponse.json({ error: 'Failed to fetch data from iTunes API' }, {status: 500});

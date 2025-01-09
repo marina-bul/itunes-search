@@ -1,18 +1,20 @@
 'use client'
 
-import { FC, FormEvent, useState } from "react";
+import { useCallback, useState } from "react";
+
+import type { FC, FormEvent } from "react";
 
 interface SearchFormProps {
-  onFormSubmit: (queryStr: string) => void
+  onSearch: (queryStr: string) => void
 }
 
-export const SearchForm:FC<SearchFormProps> = ({ onFormSubmit }) => {
+export const SearchForm:FC<SearchFormProps> = ({ onSearch }) => {
   const [searchTerm, setSearchTerm] = useState('');
 
-  const handleSubmit = (e: FormEvent) => {
+  const handleSubmit = useCallback((e: FormEvent) => {
     e.preventDefault();
-    onFormSubmit(searchTerm)
-  };
+    onSearch(searchTerm)
+  }, [searchTerm, onSearch]);
 
   return (
     <form onSubmit={handleSubmit} className='w-full flex items-center gap-3 mb-[30px]'>
