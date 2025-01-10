@@ -7,7 +7,7 @@ interface SearchResult<T> {
   isLoading: boolean
   isSuccess: boolean
   error: SearchError
-  handleSearchData: (queryString: string) => void
+  handleSearchData: (queryString: string, filter?: string) => void
 }
 
 export const useSearch = <T>():SearchResult<T> => {
@@ -16,7 +16,7 @@ export const useSearch = <T>():SearchResult<T> => {
   const [isLoading, setIsLoading] = useState(false);
   const [isSuccess, setIsSuccess] = useState(false);
 
-  const handleSearchData = useCallback(async(queryString: string) => {  
+  const handleSearchData = useCallback(async(queryString: string, filter: string = '') => {  
     setError(null);
     setData([]);
     setIsSuccess(false);
@@ -29,7 +29,7 @@ export const useSearch = <T>():SearchResult<T> => {
     }
 
     try {
-      const response = await fetch(`/api/itunes?term=${encodeURIComponent(queryString)}`, {
+      const response = await fetch(`/api/itunes?term=${encodeURIComponent(queryString)}&media=${encodeURIComponent(filter)}`, {
         method: 'GET',
         headers: { 'Content-Type': 'application/json' },
       });

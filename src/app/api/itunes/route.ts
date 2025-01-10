@@ -7,12 +7,13 @@ import type { IApiMediaItem } from '@/shared/types/media';
 export async function GET(req: Request) {
   const { searchParams } = new URL(req.url);
   const term = searchParams.get('term');
+  const media = searchParams.get('media') || '';
     
   if (!term) {
     return NextResponse.json({ error: 'Query string is required' }, { status: 400 });
   }
 
-  const apiUrl = `https://itunes.apple.com/search?term=${encodeURIComponent(term)}&limit=10`;
+  const apiUrl = `https://itunes.apple.com/search?term=${encodeURIComponent(term)}&media=${encodeURIComponent(media)}&limit=10`;
 
   try {
     const response = await fetch(apiUrl);
